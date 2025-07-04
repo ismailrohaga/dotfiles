@@ -71,10 +71,57 @@ ln -sf ~/.dotfiles/shell/.profile ~/.profile
 # Config directory symlinks
 mkdir -p ~/.config
 ln -sf ~/.dotfiles/config/sketchybar ~/.config/sketchybar
-ln -sf ~/.dotfiles/config/nvim ~/.config/nvim
 ln -sf ~/.dotfiles/config/fish ~/.config/fish
 ln -sf ~/.dotfiles/config/wezterm ~/.config/wezterm
 ln -sf ~/.dotfiles/config/btop ~/.config/btop
+```
+
+## 🔗 How Symlinks Work
+
+**This is the magic of dotfiles!** Instead of copying files, we create **symbolic links (symlinks)** that point from your system's expected config locations to your dotfiles repository.
+
+### What happens when you run `./install.sh`:
+
+```bash
+# Instead of copying files like this:
+cp ~/.dotfiles/shell/.zshrc ~/.zshrc
+
+# We create symlinks like this:
+ln -sf ~/.dotfiles/shell/.zshrc ~/.zshrc
+```
+
+### 🎯 **The Benefits:**
+
+- **✅ Single source of truth**: All configs live in `~/.dotfiles/`
+- **✅ Automatic sync**: Edit in `~/.dotfiles/`, changes apply instantly
+- **✅ Version control**: Track all changes with git
+- **✅ Easy backup**: Push to GitHub, pull on any machine
+
+### 🔍 **Example Workflow:**
+
+```bash
+# Edit your shell config
+nvim ~/.dotfiles/shell/.zshrc
+
+# Changes are immediately active because ~/.zshrc → ~/.dotfiles/shell/.zshrc
+source ~/.zshrc
+
+# Commit your changes
+cd ~/.dotfiles
+git add shell/.zshrc
+git commit -m "Update shell aliases"
+git push
+```
+
+### 📁 **Symlink Map:**
+
+```
+~/.zshrc                    → ~/.dotfiles/shell/.zshrc
+~/.aerospace.toml           → ~/.dotfiles/aerospace/.aerospace.toml
+~/.config/sketchybar/       → ~/.dotfiles/config/sketchybar/
+~/.config/fish/             → ~/.dotfiles/config/fish/
+~/.config/wezterm/          → ~/.dotfiles/config/wezterm/
+~/.config/btop/             → ~/.dotfiles/config/btop/
 ```
 
 ## 🔧 Configuration Highlights

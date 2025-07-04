@@ -11,7 +11,8 @@ source $ZSH/oh-my-zsh.sh
 # User Configurations
 #############################
 
-# Neovim setup
+# API Keys - Load from separate file for security
+[ -f ~/.config/env/secrets.sh ] && source ~/.config/env/secrets.sh
 
 # NVM (Node Version Manager)
 export NVM_DIR="$HOME/.nvm"

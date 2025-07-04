@@ -64,9 +64,6 @@ mkdir -p "$HOME/.config"
 # SketchyBar
 create_symlink "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
 
-# Neovim
-create_symlink "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
-
 # Fish Shell
 create_symlink "$DOTFILES_DIR/config/fish" "$HOME/.config/fish"
 
@@ -75,6 +72,27 @@ create_symlink "$DOTFILES_DIR/config/wezterm" "$HOME/.config/wezterm"
 
 # Btop
 create_symlink "$DOTFILES_DIR/config/btop" "$HOME/.config/btop"
+
+echo
+echo -e "${BLUE}🔐 Setting up secure environment...${NC}"
+# Create secrets directory if it doesn't exist
+mkdir -p "$HOME/.config/env"
+if [[ ! -f "$HOME/.config/env/secrets.sh" ]]; then
+    cat > "$HOME/.config/env/secrets.sh" << 'EOF'
+#!/bin/bash
+
+# Private API Keys and Secrets
+# This file should NOT be committed to version control
+
+# Add your API keys here:
+# export ANTHROPIC_API_KEY="your-anthropic-key-here"
+# export OPENAI_API_KEY="your-openai-key-here"
+# export GITHUB_TOKEN="your-github-token-here"
+EOF
+    chmod 600 "$HOME/.config/env/secrets.sh"
+    echo -e "${GREEN}✅ Created secure secrets file at ~/.config/env/secrets.sh${NC}"
+    echo -e "${YELLOW}⚠️  Remember to add your API keys to this file!${NC}"
+fi
 
 echo
 echo -e "${BLUE}🔧 Setting up executable permissions...${NC}"

@@ -21,8 +21,11 @@ config/nvim/.netrwhist
 
 # Personal/Local files
 config/sketchybar/secrets.sh
+config/nvim/
 local/
 private/
+secrets.sh
+.env
 
 # Temporary files
 .tmp/
