@@ -35,9 +35,41 @@ My personal macOS dotfiles and configuration setup.
 
 Make sure you have the following installed:
 
-- [Homebrew](https://brew.sh/)
-- [AeroSpace](https://github.com/nikitabobko/AeroSpace)
-- [SketchyBar](https://github.com/FelixKratz/SketchyBar)
+#### **Required Dependencies:**
+
+- [Homebrew](https://brew.sh/) - Package manager for macOS
+- [AeroSpace](https://github.com/nikitabobko/AeroSpace) - Tiling window manager
+- [SketchyBar](https://github.com/FelixKratz/SketchyBar) - Status bar
+- [Fish Shell](https://fishshell.com/) - Modern shell
+- [Neovim](https://neovim.io/) - Text editor
+- [WezTerm](https://wezfurlong.org/wezterm/) - Terminal emulator
+
+#### **Optional Dependencies:**
+
+- [pyenv](https://github.com/pyenv/pyenv) - Python version management
+- [nvm](https://github.com/nvm-sh/nvm) - Node.js version management
+- [fzf](https://github.com/junegunn/fzf) - Fuzzy finder
+- [btop](https://github.com/aristocratos/btop) - System monitor
+
+#### **Quick Install All Dependencies:**
+
+```bash
+# Install Homebrew first
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install main dependencies
+brew install --cask aerospace sketchybar wezterm
+brew install fish neovim fzf btop
+
+# Install development tools
+brew install pyenv nvm
+
+# Install Oh My Zsh (for zsh configuration)
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+
+# Install zsh-autosuggestions plugin
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+```
 
 ### Quick Setup
 
@@ -124,6 +156,50 @@ git push
 ~/.config/btop/             → ~/.dotfiles/config/btop/
 ```
 
+## 🔐 Secure API Key Management
+
+**Your API keys are now safely managed!** Instead of hardcoding sensitive information in your dotfiles, we use a separate secrets file.
+
+### 🔍 **How It Works:**
+
+```bash
+# Your .zshrc loads secrets from a separate file
+[ -f ~/.config/env/secrets.sh ] && source ~/.config/env/secrets.sh
+```
+
+### 📁 **Secrets File Location:**
+
+```
+~/.config/env/secrets.sh  # Your private API keys (NOT in git)
+```
+
+### 🛠️ **Managing Your API Keys:**
+
+```bash
+# Edit your secrets file
+nvim ~/.config/env/secrets.sh
+
+# Example content:
+#!/bin/bash
+export ANTHROPIC_API_KEY="your-anthropic-key-here"
+export OPENAI_API_KEY="your-openai-key-here"
+export GITHUB_TOKEN="your-github-token-here"
+```
+
+### 🔒 **Security Features:**
+
+- **✅ Secure permissions** (600) - only you can read/write
+- **✅ Not tracked by git** - added to `.gitignore`
+- **✅ Automatic loading** - sourced by shell configuration
+- **✅ Separate from dotfiles** - no accidental commits
+
+### ⚠️ **Important Notes:**
+
+- **Never commit secrets** to version control
+- **Backup your secrets file** separately and securely
+- **Use environment variables** for all sensitive data
+- **Regenerate keys** if accidentally exposed
+
 ## 🔧 Configuration Highlights
 
 ### AeroSpace + SketchyBar Integration
@@ -198,6 +274,69 @@ Feel free to customize the configurations to your needs:
 - `config/sketchybar/colors.sh` - Color scheme
 - `config/sketchybar/sketchybarrc` - Status bar layout
 - `shell/.zshrc` - Shell aliases and functions
+
+## 🚨 Troubleshooting
+
+### Common Issues and Solutions:
+
+#### **"Command not found" errors:**
+
+```bash
+# Install missing dependencies
+brew install --cask aerospace sketchybar wezterm
+brew install fish neovim fzf btop pyenv nvm
+```
+
+#### **Permission denied errors:**
+
+```bash
+# Run the install script to fix permissions
+cd ~/.dotfiles && ./install.sh
+```
+
+#### **SketchyBar not loading:**
+
+```bash
+# Check if SketchyBar is running
+brew services restart sketchybar
+
+# Check permissions
+chmod +x ~/.config/sketchybar/sketchybarrc
+chmod +x ~/.config/sketchybar/plugins/*.sh
+```
+
+#### **AeroSpace not working:**
+
+```bash
+# Restart AeroSpace
+aerospace reload-config
+```
+
+#### **Fish shell not found:**
+
+```bash
+# Install fish and add to shells
+brew install fish
+echo $(which fish) | sudo tee -a /etc/shells
+chsh -s $(which fish)
+```
+
+#### **API keys not loading:**
+
+```bash
+# Check if secrets file exists and has proper permissions
+ls -la ~/.config/env/secrets.sh
+# Should show: -rw------- (600 permissions)
+
+# If not, fix permissions:
+chmod 600 ~/.config/env/secrets.sh
+```
+
+### **Getting Help:**
+
+- Check the [AeroSpace documentation](https://github.com/nikitabobko/AeroSpace)
+- Check the [SketchyBar documentation](https://github.com/FelixKratz/SketchyBar)
+- Open an issue in this repository
 
 ## 🤝 Contributing
 
