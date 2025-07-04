@@ -103,6 +103,7 @@ ln -sf ~/.dotfiles/shell/.profile ~/.profile
 # Config directory symlinks
 mkdir -p ~/.config
 ln -sf ~/.dotfiles/config/sketchybar ~/.config/sketchybar
+ln -sf ~/.dotfiles/config/nvim ~/.config/nvim
 ln -sf ~/.dotfiles/config/fish ~/.config/fish
 ln -sf ~/.dotfiles/config/wezterm ~/.config/wezterm
 ln -sf ~/.dotfiles/config/btop ~/.config/btop
@@ -151,6 +152,7 @@ git push
 ~/.zshrc                    → ~/.dotfiles/shell/.zshrc
 ~/.aerospace.toml           → ~/.dotfiles/aerospace/.aerospace.toml
 ~/.config/sketchybar/       → ~/.dotfiles/config/sketchybar/
+~/.config/nvim/             → ~/.dotfiles/config/nvim/
 ~/.config/fish/             → ~/.dotfiles/config/fish/
 ~/.config/wezterm/          → ~/.dotfiles/config/wezterm/
 ~/.config/btop/             → ~/.dotfiles/config/btop/

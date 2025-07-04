@@ -146,6 +146,9 @@ mkdir -p "$HOME/.config"
 # SketchyBar
 create_symlink "$DOTFILES_DIR/config/sketchybar" "$HOME/.config/sketchybar"
 
+# Neovim
+create_symlink "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
+
 # Fish Shell
 create_symlink "$DOTFILES_DIR/config/fish" "$HOME/.config/fish"
 
