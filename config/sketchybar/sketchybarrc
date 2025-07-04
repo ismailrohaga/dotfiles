@@ -1,0 +1,39 @@
+#!/bin/bash
+
+source "$HOME/.config/sketchybar/colors.sh"
+
+PLUGIN_DIR="$HOME/.config/sketchybar/plugins"
+ITEM_DIR="$HOME/.config/sketchybar/items"
+
+sketchybar --bar position=top height=40 blur_radius=30 color=$BAR_COLOR
+
+default=(
+  padding_left=5
+  padding_right=5
+  icon.font="SF Pro:Semibold:15.0"
+  icon.padding_left=4
+  icon.padding_right=4
+  label.font="SF Pro:Semibold:15.0"
+  label.color=$WHITE
+  label.padding_left=4
+  label.padding_right=4
+  background.color=$ITEM_BG_COLOR
+  background.corner_radius=5
+  background.height=24
+)
+sketchybar --default "${default[@]}"
+
+# -- Left Side Items --
+source $ITEM_DIR/front_app.sh
+source $ITEM_DIR/spaces.sh
+
+# -- Center Items --
+source $ITEM_DIR/media.sh
+
+# --- Right Side Items ---
+source $ITEM_DIR/calendar.sh
+source $ITEM_DIR/volume.sh
+source $ITEM_DIR/battery.sh
+source $ITEM_DIR/cpu.sh
+
+sketchybar --update

@@ -1,0 +1,29 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Backup files
+*.backup
+*.bak
+*.tmp
+
+# Logs
+*.log
+
+# Fish shell
+config/fish/fish_variables
+config/fish/conf.d/
+
+# Neovim
+config/nvim/plugin/
+config/nvim/.netrwhist
+
+# Personal/Local files
+config/sketchybar/secrets.sh
+local/
+private/
+
+# Temporary files
+.tmp/
+temp/ 
