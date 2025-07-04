@@ -53,7 +53,7 @@ check_dependencies() {
   fi
 
   if ! command_exists wezterm; then
-    missing_deps+=("wezterm")
+    optional_missing+=("wezterm")
   fi
 
   # Check optional dependencies
@@ -153,7 +153,11 @@ create_symlink "$DOTFILES_DIR/config/nvim" "$HOME/.config/nvim"
 create_symlink "$DOTFILES_DIR/config/fish" "$HOME/.config/fish"
 
 # WezTerm
-create_symlink "$DOTFILES_DIR/config/wezterm" "$HOME/.config/wezterm"
+if command_exists wezterm; then
+  create_symlink "$DOTFILES_DIR/config/wezterm" "$HOME/.config/wezterm"
+else
+  echo -e "${YELLOW}⚠️  Skipping WezTerm config: wezterm not installed${NC}"
+fi
 
 # Btop
 create_symlink "$DOTFILES_DIR/config/btop" "$HOME/.config/btop"
